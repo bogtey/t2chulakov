@@ -1,0 +1,906 @@
+:root {
+    --font-primary: 'Roboto', sans-serif;
+    --font-secondary: 'Montserrat', sans-serif;
+    --font-stencil: 'Standard CT Stencil', sans-serif; /* Шрифт для заголовка */
+    --font-stencil-bold: 'StandardCTStencil-Bold'; /* Новый шрифт для заголовка */
+    --color-background: #1F2229; /* Цвет фона */
+    --color-divider: #383D4A; /* Цвет разделителя */
+    --color-text: #FFFFFF; /* Цвет текста */
+    --font-size-base: 16px;
+}
+
+body {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-base);
+    margin: 0;
+    padding: 0;
+    background: var(--color-background);
+    color: var(--color-text);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between; /* Размещаем элементы по краям */
+    align-items: center; /* Вертикальное выравнивание */
+    padding: 10px;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    border-bottom: 1px solid var(--color-divider); /* Тонкая линия разделитель */
+}
+
+@font-face {
+    font-family: 'DM Serif Display';
+    src: url('../fonts/DMSerifDisplay-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.header__logo {
+    display: flex;
+    align-items: center; /* Вертикальное выравнивание */
+}
+
+.header__logo-image {
+    max-height: 50px; /* Ограничиваем высоту логотипа */
+    padding-left: 15px;
+}
+
+.header__city-selector {
+    display: flex;
+    align-items: center; /* Вертикальное выравнивание */
+    padding-right: 20px;
+    z-index: 1000;
+}
+
+.header__location-icon {
+    margin-right: 5px; /* Отступ между иконкой и кнопкой */
+}
+
+.header__icon {
+    font-size: 20px; /* Размер иконки */
+    color: var(--color-text); /* Цвет иконки */
+}
+
+.header__city-button {
+    background: none;
+    border: none;
+    color: var(--color-text);
+    font-size: 16px;
+    cursor: pointer;
+    padding: 0;
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+}
+
+.header__city-button:focus {
+    outline: none;
+}
+
+.main-content {
+    max-width: 1300px; /* Увеличиваем максимальную ширину */
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.module {
+    width: 100%;
+    max-width: 1300px; /* Соответствует main-content */
+    margin: 0 auto;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.module--promo,
+.module--entertainment,
+.module--info {
+    margin-top: 140px;
+    margin-bottom: 70px;
+}
+
+.module--promo {
+    display: flex;
+    align-items: center;
+    background-color: var(--color-background);
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 999;
+}
+
+.region-confirm {
+    display: none;
+    position: absolute;
+    right: 0;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 20px;
+    z-index: 1000;
+    width: 280px;
+    margin-right: 50px;
+}
+
+.region-confirm__content {
+    text-align: center;
+}
+
+.region-confirm__text {
+    color: #000;
+    font-size: 16px;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.region-confirm__buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    align-items: center;
+}
+
+.region-confirm__button-yes {
+    background: transparent;
+    border: 1px solid #000;
+    color: #000;
+    padding: 10px 24px;
+    border-radius: 25px;
+    cursor: pointer font-size: 14px;
+    transition: all 0.3s ease;
+    max-width: 200px;
+}
+
+.region-confirm__button-yes:hover {
+    background: #000;
+    color: #fff;
+}
+
+.region-confirm__button-change {
+    background: none;
+    border: none;
+    color: #000;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 5px;
+}
+
+.region-confirm__button-change:hover {
+    opacity: 0.7;
+}
+
+.header__city-selector {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.region-confirm::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    right: 20px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid white;
+}
+
+.module--entertainment {
+    text-align: left;
+    margin-top: 130px;
+}
+
+.module--entertainment .module__title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 40px;
+    margin-bottom: 20px;
+    text-transform: none;
+}
+
+.module--entertainment .module__text {
+    max-width: 600px;
+}
+
+.module__title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 40px;
+    margin-bottom: 20px;
+    text-transform: none; /* Убираем трансформацию в верхний регистр, если она была */
+}
+
+.module__icons {
+    display: flex;
+    justify-content: flex-start;
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.module__icon-item {
+    display: flex;
+    align-items: center;
+    gap: 0px; /* Расстояние между иконкой и текстом */
+}
+
+.module__icon {
+    font-size: 24px; /* Размер иконки */
+    flex-shrink: 0; /* Предотвращает сжатие иконки */
+}
+
+.module__icon-item p {
+    margin: 0; /* Убираем стандартные отступы параграфа */
+}
+
+.module__content {
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.module--promo .module__content {
+    width: 65%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+}
+
+.module--promo .module__text-container {
+    flex: 0 0 600px; /* Фиксированная ширина */
+}
+
+.module--promo .module__image {
+    flex: 0 0 584px; /* Фиксированная ширина */
+    height: 551px;
+}
+
+.module__text-container {
+    max-width: 600px; /* Такая же ширина как у текста второй секции */
+}
+
+.module__text {
+    line-height: 1.5;
+    margin-bottom: 30px;
+}
+
+.module__promo-dates {
+    font-size: 16px; /* Размер шрифта для даты акции */
+    margin-bottom: 40px;
+}
+
+.module__promo-image {
+    position: relative; /* Относительное позиционирование для корректного отображения под текстом */
+    top: 0; /* Убираем смещение для компьютерной версии */
+    left: 0; /* Убираем смещение для компьютерной версии */
+    opacity: 1; /* Полная непрозрачность */
+    margin-top: 10px; /* Отступ сверху для разделения с текстом */
+}
+
+.module__promo-title {
+    font-family: var(--font-stencil); /* Используем шрифт */
+    font-size: 68px; /* Размер шрифта */
+    font-weight: 700; /* Жирный текст */
+    line-height: 68px; /* Высота строки */
+    text-align: left; /* Выравнивание текста */
+    margin: 10px 0; /* Отступы сверху и снизу */
+}
+
+.module__promo-description {
+    font-size: 16px; /* Размер шрифта для описания */
+    margin-bottom: 45px;
+}
+
+.module__button {
+    display: inline-block;
+    background-color: white;
+    color: var(--color-background);
+    padding: 20px 40px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+}
+.module__button1 {
+    display: inline-block;
+    background-color: white;
+    color: var(--color-background);
+    padding: 20px 40px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.module__button:hover {
+    background-color: #f0f0f0; /* Цвет кнопки при наведении */
+}
+.module__button1:hover {
+    background-color: #f0f0f0; /* Цвет кнопки при наведении */
+}
+
+.module__image {
+    flex: 0 0 584px ; /* Фиксированная ширина */
+    height: 551px; /* Фиксированная высота */
+    position: relative;
+    overflow: hidden;
+}
+
+.module__promo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.module__image::after {
+    content: '';
+    position: absolute;
+    top: 0; /* Начинаем с верхней части изображения */
+    left: 0;
+    right: 0;
+    height: 100%; /* Полная высота изображения */
+    background: linear-gradient(181.22deg, rgba(31, 34, 41, 0) 59.33%, rgba(31, 34, 41, 0.87) 80.47%, #1F2229 98.98%); /* Ваш градиент */
+}
+
+.footer {
+    background-color: var(--color-divider);
+    color: var(--color-text);
+    text-align: center;
+    padding: 10px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Стили для модального окна */
+.modal {
+    display: none;
+    position: fixed;
+    top: 80px; /* Высота шапки */
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 80px);
+    background-color: var(--color-background);
+    z-index: 999;
+    overflow-y: auto;
+}
+
+.modal__content {
+    padding: 40px;
+    color: #FFFFFF;
+}
+
+.modal__title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.modal__close {
+    cursor: pointer; /* Указатель при наведении */
+    float: right; /* Выравнивание по правому краю */
+    font-size: 20px; /* Размер шрифта для кнопки закрытия */
+}
+
+.modal__city-list {
+    list-style: none;
+    padding: 0;
+    columns: auto 4; /* Разбивает содержимое на столбцы по 4 элемента */
+    column-gap: 40px; /* Расстояние между столбцами */
+    max-width: 1200px; /* Максимальная ширина списка */
+    margin: 0 auto; /* Центрирование списка */
+}
+
+.modal__city-list li {
+    break-inside: avoid; /* Предотвращает разрыв элемента между столбцами */
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: left;
+    white-space: nowrap; /* Предотвращает перенос текста на новую строку */
+    overflow: hidden; /* Скрывает текст, который не помещается */
+    text-overflow: ellipsis; /* Добавляет многоточие в конце, если текст не помещается */
+}
+
+.modal__city-list li:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.module--info {
+    background-color: #1F2229;
+}
+
+.module__left-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Расстояние между элементами */
+    align-items: flex-start; /* Выравнивание по левому краю */
+}
+
+.module--info .module__left-column {
+    flex: 0 0 600px; /* Фиксированная ширина */
+}
+
+.module--info .module__right-column {
+    flex: 0 0 600px; /* Фиксированная ширина */
+}
+
+.module--info .module__content {
+    display: flex;
+    justify-content: space-between;
+    gap: 80px;
+}
+
+.module__title-image {
+    width: 348px; /* Точная ширина как у поля ввода */
+    height: auto;
+}
+
+.module__title {
+    font-size: 40px;
+    margin-bottom: 40px;
+    font-family: 'DM Serif Display', serif;
+}
+
+.module__step {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    gap: 20px;
+}
+
+.module__step {
+    margin-bottom: 30px;
+}
+
+.module__step-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.module__step-text {
+    margin-bottom: 15px;
+}
+
+.module__phone-input {
+    margin-bottom: 20px;
+}
+
+.module__phone-input label {
+    display: block;
+    margin-bottom: 10px;
+    color: #FFFFFF;
+}
+
+.module__phone-input input {
+    width: 348px; /* Фиксированная ширина поля ввода */
+    padding: 15px;
+    border: 1px solid #383D4A;
+    border-radius: 4px;
+    background-color: transparent;
+    color: #FFFFFF;
+}
+
+.module__consent {
+    margin-bottom: 20px;
+    color: #FFFFFF;
+    width: 348px;
+}
+
+.module__consent a {
+    color: #FFFFFF;
+}
+
+.module__button {
+    padding: 15px 30px;
+    background-color: #FFFFFF;
+    color: #1F2229;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.module__button1 {
+    padding: 15px 30px;
+    background-color: #FFFFFF;
+    color: #1F2229;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.module__confirmation {
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 20px;
+    display: none; /* Изначально скрыто */
+}
+
+.module__button:disabled {
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+}
+
+.module__button1:disabled {
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+}
+
+.module__step-icon {
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+}
+
+.module__step-text {
+    margin: 0;
+    line-height: 1.5;
+}
+
+.module__step-icon {
+    width: 60px; /* или другой размер, соответствующий вашему дизайну */
+    height: 60px;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.footer {
+    margin-top: 200px;
+    background-color: var(--color-background);
+    padding-bottom: 50px;
+    position: relative;
+}
+
+.footer__line {
+    width: 1320px;
+    height: 1px;
+    background-color: #383D4A;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.footer__social-icons {
+    position: absolute;
+    left: 0;
+    top: -45px;
+    display: flex;
+    gap: 20px;
+    background-color: var(--color-background);
+    padding: 0 10px;
+}
+
+.footer__social-link1 img {
+    width: 40px;
+    height: 40px;
+}
+
+.footer__social-link2 img {
+    width: 40px;
+    height: 40px;
+}
+
+.footer__social-link3 img {
+    width: 100%;
+    height: 50%;
+    width: 25px;
+    height: 38px;
+}
+
+.footer__action-conditions {
+    position: absolute;
+    right: 0;
+    top: -40px;
+    display: flex;
+    align-items: center;
+    color: #383D4A;
+    gap: 10px;
+    background-color: var(--color-background);
+    padding: 0 10px;
+}
+
+.footer__action-conditions span {
+    color: #dddddd;
+}
+
+.footer__action-conditions img {
+    width: 36px;
+    height: 36px;
+}
+
+.footer__bottom {
+    width: 1320px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #a1a1a1;
+}
+
+.footer__bottom-left, 
+.footer__bottom-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.footer__bottom-left img,
+.footer__bottom-right img {
+    max-height: 20px;
+}
+
+/* Стили для мобильной версии */
+@media (max-width: 768px) {
+    .module {
+        padding: 0 20px;
+    }
+    .module__content {
+        flex-direction: column;
+    }
+
+    .footer__bottom-right {
+        display: none; /* Скрыть элемент на мобильных устройствах */
+    }
+
+    .main-content {
+        padding: 0;
+    }
+    .module__consent {
+        width: 256px;
+    }
+
+    .footer__social-icons,
+    .footer__action-conditions,
+    .footer__line,
+    .footer__bottom {
+        width: 100%;
+        max-width: 1111px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0 20px;
+    }
+
+    .footer__social-icons {
+        left: -20px;
+    }
+    .modal__title {
+        text-align: left;
+    }
+
+    .footer__action-conditions {
+        right: -195px;
+    }
+    .modal__content {
+        padding: 20px;
+    }
+
+    .module--info .module__title-image {
+        opacity: 0; /* Делает изображение прозрачным */
+        visibility: hidden; /* Скрывает изображение */
+        position: absolute; /* Убирает из потока документа */
+        width: 0;
+        height: 0;
+    }
+
+    .module__left-column,
+    .module__right-column {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .module--info .module__content {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+    }
+    .module--info .module__content > div:nth-child(1) {
+        order: 2; /* Левый столбец */
+    }
+    .module--info .module__content > div:nth-child(2) {
+        order: 1; /* Правый столбец */
+    }
+
+    .module--promo .module__content,
+    .module--info .module__content {
+        flex-direction: column;
+    }
+
+    .module--promo .module__text-container {
+        order: 1; /* Текстовый контейнер перед изображением */
+        width: 100%;
+        max-width: 350px;
+        flex: 0 0 0px;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Центрирование содержимого */
+        text-align: center; /* Центрирование текста */
+    }
+
+    .module--promo .module__image,
+    .module--info .module__left-column,
+    .module--info .module__right-column {
+        width: 100%;
+        max-width: 100%;
+        flex: none;
+    }
+
+    .module__step {
+        display: grid;
+        align-items: center;
+        margin-bottom: 30px;
+        gap: 20px;
+    }
+
+    .module--promo .module__button .module__button1 {
+        order: 3; /* Кнопка после изображения */
+        align-self: center; /* Центрирование кнопки */
+    }
+
+    .module--info .module__content::before {
+        content: '';
+        position: absolute;
+        top: -80px; /* Регулируйте отступ сверху */
+        left: 40%;
+        transform: translateX(-50%);
+        width: 100%;
+        max-width: 300px; /* Максимальная ширина изображения */
+        height: 100px; /* Высота может меняться */
+        background-image: url('images/оставьтеномер.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        z-index: 1;
+    }
+
+    .module--info .module__left-column,
+    .module--info .module__right-column {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .module--promo {
+        flex-direction: column;
+        position: relative;
+        padding: 0px;
+    }
+    .module--entertainment,
+    .module--info {
+        margin: 60px 0;
+    }
+
+    .module__right-column {
+        margin-top: 40px;
+    }
+    .modal__city-list {
+        columns: auto 2; /* 2 столбца на меньших экранах */
+    }
+
+    .module--info {
+        padding-top: 140px;
+        padding-bottom: 20px;
+    }
+
+    .module__image {
+        height: auto;
+        aspect-ratio: 584/551;
+    }
+    .module__promo-img {
+        width: 100%;
+        height: 99%;
+        object-fit: cover;
+    }
+
+    .module__promo-img1 {
+        width: 280px;
+        height: auto;
+        object-fit: cover;
+    }
+
+    .module__title {
+        font-size: 32px;
+    }
+
+    .module__promo-image {
+        width: 100%;
+        height: auto;
+        margin-top: 10px;
+    }
+    .module__promo-image1 {
+        width: 65%;
+        height: auto;
+        margin-top: 10px;
+    }
+    .module--entertainment {
+        margin: 100px 0;
+    }
+    .module__phone-input input {
+        width: 100%; /* Полная ширина на мобильных */
+        max-width: 348px; /* Максимальная ширина */
+    }
+    .module--promo {
+        flex-direction: column;
+        position: relative;
+        padding: 0px;
+    }
+    .module__text-container {
+        position: relative;
+        z-index: 2;
+        background-color: rgba(31, 34, 41, 0.7); /* Добавляем полупрозрачный фон */
+        padding: 20px;
+        border-radius: 8px;
+    }
+
+    .region-confirm {
+        margin-right: 65px;
+    }
+
+    .module__content {
+        flex-direction: column;
+    }
+
+    .module--promo .module__content {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Центрирование по горизонтали */
+        padding: 20px 0;
+    }
+
+    .module__left-column,
+    .module__right-column {
+        width: 48%; /* Немного меньше 50%, чтобы оставить промежуток */
+    }
+
+    .module--promo,
+    .module--entertainment,
+    .module--info {
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    .module--promo .module__image1 {
+        order: 2; /* Изображение после текстового контейнера */
+        width: 100%;
+        display: flex;
+        justify-content: center; /* Центрирование изображения */
+        margin-bottom: 20px; /* Отступ перед кнопкой */
+    }
+
+    .module--promo .module__promo-img1 {
+        max-width: 280px; /* Ограничение ширины изображения */
+        height: auto;
+    }
+
+    .module__content {
+        width: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .module__icons {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .module--info .module__content {
+        gap: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal__city-list {
+        columns: auto 1; /* 1 столбец на совсем маленьких экранах */
+    }
+}
